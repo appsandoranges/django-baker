@@ -1,9 +1,8 @@
 from __future__ import print_function
-
+import argparse
 from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import ImproperlyConfigured
 from django.apps import apps
-
 from ...bakery import Baker
 
 
@@ -12,6 +11,9 @@ class Command(BaseCommand):
     help = ("Generates generic views (create, update, detail, list, and delete), urls, forms, and admin for model in an"
             "app.  Optionally can restrict which apps are generated on a per app basis.\n\nexample: python manage.py "
             "bake bread:Sesame,Pumpkernickel donut:Glazed,Chocolate")
+
+    def add_arguments(self, parser):
+      parser.add_argument('args', nargs=argparse.REMAINDER)
 
     def handle(self, *args, **options):
         ingredients = self.parse_bake_options(*args)
