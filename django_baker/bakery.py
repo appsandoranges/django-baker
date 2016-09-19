@@ -65,7 +65,7 @@ class Baker(object):
         for folder_name in ["views", "urls"]:
             file_path = "%s/%s/__init__.py" % (app.path, folder_name)
             template_path = "django_baker/__init__%s" % folder_name
-            self.create_file_from_template(file_path, template_path, {"app": app.label,
+            self.create_file_from_template(file_path, template_path, {"app_label": app.label,
                                                                       "model_name_slugs": model_name_slugs,
                                                                       "model_names_dict": model_names_dict
                                                                       })
