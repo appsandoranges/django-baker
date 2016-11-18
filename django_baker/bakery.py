@@ -40,9 +40,7 @@ class Baker(object):
             Returns fields other than id and uneditable fields (DateTimeField where auto_now or auto_now_add is True)
         """
         return [field.name for field in model._meta.get_fields() if field.name != "id" and 
-                field.name != "created" and field.name != "modified" and not
-                (field.get_internal_type() == "DateTimeField" and
-                 (field.auto_now is True or field.auto_now_add is True)) ]
+               field.editable == True ]
 
     def create_directories(self, app):
         """
