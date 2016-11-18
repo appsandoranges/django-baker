@@ -1,5 +1,12 @@
 {% templatetag openblock %} extends "{{ app_label }}/{{ model_name_slug }}_base.html" {% templatetag closeblock %}
+{% verbatim %}
+	{% load crispy_forms_tags %}
 
+	{% block javascript %}
+		{{ block.super }}
+		{{ form.media }}
+	{% endblock javascript %}
+{% endverbatim %}
 {% verbatim %}{% block title %}{% endverbatim %}
     Update {% templatetag openvariable %} {{ model_name_slug }} {% templatetag closevariable %}
 {% verbatim %}{% endblock %}{% endverbatim %}
@@ -9,7 +16,7 @@
 <h2>Update {% templatetag openvariable %} {{ model_name_slug }} {% templatetag closevariable %}</h2>
 
 <form action="" method="post">{% verbatim %}{% csrf_token %}{% endverbatim %}
-    {% verbatim %}{{ form.as_p }}{% endverbatim %}
+    {% verbatim %}{{ form | crispy }}{% endverbatim %}
     <input type="submit" value="Update" />
 </form>
 <a href={% templatetag openblock %} url "{{ model_name_slug }}_detail" {{ model_name_slug }}.{{ lookup_field }} {% templatetag closeblock %}>Cancel</a>

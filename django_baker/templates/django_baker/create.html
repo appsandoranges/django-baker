@@ -1,5 +1,12 @@
 {% templatetag openblock %} extends "{{ app_label }}/{{ model_name_slug }}_base.html" {% templatetag closeblock %}
+{% verbatim %}
+	{% load crispy_forms_tags %}
 
+	{% block javascript %}
+		{{ block.super }}
+		{{ form.media }}
+	{% endblock javascript %}
+{% endverbatim %}
 {% verbatim %}{% block title %}{% endverbatim %}
     Create {{ model_name }}
 {% verbatim %}{% endblock %}{% endverbatim %}
@@ -9,7 +16,7 @@
 <h2>Create {{ model_name }}</h2>
 
 <form action="" method="post">{% verbatim %}{% csrf_token %}{% endverbatim %}
-    {% verbatim %}{{ form.as_p }}{% endverbatim %}
+    {% verbatim %}{{ form | crispy }}{% endverbatim %}
     <input type="submit" value="Create" />
 </form>
 <a href={% templatetag openblock %} url "{{ model_name_slug }}_list" {% templatetag closeblock %}>Cancel</a>
