@@ -42,9 +42,7 @@ class Baker(object):
         return [field.name for field in model._meta.get_fields() if field.name != "id" and 
                 field.name != "created" and field.name != "modified" and not
                 (field.get_internal_type() == "DateTimeField" and
-                 (field.auto_now is True or field.auto_now_add is True)) and 
-                field.concrete and ( not field.is_relation or field.one_to_one or 
-                    (field.many_to_one and field.related_model))]
+                 (field.auto_now is True or field.auto_now_add is True)) ]
 
     def create_directories(self, app):
         """
